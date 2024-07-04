@@ -38,21 +38,21 @@ class DefaultFirebaseOptions {
 
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCytHti8p3N6L5qPktB5Gnj7caZSTwATww',
-    appId: '1:789661885548:android:ff4f263cdb128e67a5a449',
-    messagingSenderId: '789661885548',
-    projectId: 'sunmolor-team',
-    authDomain: 'sunmolor-team.firebaseapp.com',
-    storageBucket: 'gs://sunmolor-team.appspot.com',
+    apiKey: 'AIzaSyC_sx7_5quloKE9uoH-xDveYvlfvp3j4Hw',
+    appId: '1:737651613348:android:d9f9024ba7d89965cc5031',
+    messagingSenderId: '737651613348',
+    projectId: 'catat-keuangan-c0a5f',
+    authDomain: 'catat-keuangan-c0a5f.firebaseapp.com',
+    storageBucket: 'gs://catat-keuangan-c0a5f.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCytHti8p3N6L5qPktB5Gnj7caZSTwATww',
+    apiKey: 'AIzaSyC_sx7_5quloKE9uoH-xDveYvlfvp3j4Hw',
     appId: '1:789661885548:android:ff4f263cdb128e67a5a449',
     messagingSenderId: '789661885548',
-    projectId: 'sunmolor-team',
-    authDomain: 'sunmolor-team.firebaseapp.com',
-    storageBucket: 'gs://sunmolor-team.appspot.com',
+    projectId: 'catat-keuangan-c0a5f',
+    authDomain: 'catat-keuangan-c0a5f.firebaseapp.com',
+    storageBucket: 'gs://catat-keuangan-c0a5f.appspot.com',
     iosClientId: '1045475764615-sh6bdtfvq5gi9hdi9elu247v7usqsvpl.apps.googleusercontent.com',
     iosBundleId: 'com.mrezys',
   );

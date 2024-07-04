@@ -96,7 +96,7 @@ class App extends StatelessWidget {
                 child: child ?? Container(),
               );
             },
-            home: HomePage(),
+            home: const HomePage(),
           ),
         ),
       ),
