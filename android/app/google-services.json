@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "789661885548",
-    "project_id": "sunmolor-team",
-    "storage_bucket": "sunmolor-team.appspot.com"
+    "project_number": "737651613348",
+    "project_id": "catat-keuangan-c0a5f",
+    "storage_bucket": "catat-keuangan-c0a5f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789661885548:android:ff4f263cdb128e67a5a449",
+        "mobilesdk_app_id": "1:737651613348:android:d9f9024ba7d89965cc5031",
         "android_client_info": {
-          "package_name": "com.sasat.sunmolorteam"
+          "package_name": "com.sasat.catat_keuangan"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCytHti8p3N6L5qPktB5Gnj7caZSTwATww"
+          "current_key": "AIzaSyC_sx7_5quloKE9uoH-xDveYvlfvp3j4Hw"
         }
       ],
       "services": {

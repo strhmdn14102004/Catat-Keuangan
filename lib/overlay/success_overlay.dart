@@ -1,9 +1,7 @@
-
+import "package:catat_keuangan/helper/dimensions.dart";
+import "package:catat_keuangan/helper/navigators.dart";
 import "package:flutter/material.dart";
 import "package:lottie/lottie.dart";
-import "package:sunmolor_team/helper/dimension.dart";
-import "package:sunmolor_team/helper/navigator.dart";
-
 
 class SuccessOverlay extends ModalRoute<void> {
   final String message;

@@ -1,9 +1,8 @@
-
+import "package:catat_keuangan/helper/navigators.dart";
+import "package:catat_keuangan/overlay/cooming_soon.dart";
+import "package:catat_keuangan/overlay/error_overlay.dart";
+import "package:catat_keuangan/overlay/success_overlay.dart";
 import "package:flutter/material.dart";
-import "package:sunmolor_team/helper/navigator.dart";
-import "package:sunmolor_team/overlay/error_overlay.dart";
-import "package:sunmolor_team/overlay/success_overlay.dart";
-
 
 class Overlays {
   static Future<void> error({
@@ -12,6 +11,19 @@ class Overlays {
     if (Navigators.navigatorState.currentContext != null) {
       await Navigator.of(Navigators.navigatorState.currentContext!).push(
         ErrorOverlay(
+          message: message,
+        ),
+      );
+    }
+  }
+
+ 
+  static Future<void> comming({
+    required String message,
+  }) async {
+    if (Navigators.navigatorState.currentContext != null) {
+      await Navigator.of(Navigators.navigatorState.currentContext!).push(
+        CommingSoonOverlay(
           message: message,
         ),
       );

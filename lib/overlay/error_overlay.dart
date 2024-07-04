@@ -1,9 +1,7 @@
-
+import "package:catat_keuangan/helper/dimensions.dart";
+import "package:catat_keuangan/helper/navigators.dart";
 import "package:flutter/material.dart";
 import "package:lottie/lottie.dart";
-import "package:sunmolor_team/helper/dimension.dart";
-import "package:sunmolor_team/helper/navigator.dart";
-
 
 class ErrorOverlay extends ModalRoute<void> {
   final String message;
@@ -49,7 +47,7 @@ class ErrorOverlay extends ModalRoute<void> {
           children: <Widget>[
             Lottie.asset(
               "assets/lottie/error.json",
-              frameRate: const FrameRate(60),
+              frameRate: FrameRate(60),
               width: Dimensions.size100 * 3,
               repeat: true,
             ),

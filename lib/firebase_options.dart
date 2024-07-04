@@ -17,7 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      return android;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -36,14 +36,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCytHti8p3N6L5qPktB5Gnj7caZSTwATww',
-    appId: '1:789661885548:android:ff4f263cdb128e67a5a449',
-    messagingSenderId: '789661885548',
-    projectId: 'sunmolor-team',
-    storageBucket: 'gs://sunmolor-team.appspot.com',
-    measurementId: 'G-ECMDFE63S7',
-  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCytHti8p3N6L5qPktB5Gnj7caZSTwATww',

@@ -1,7 +1,5 @@
-
+import "package:catat_keuangan/helper/navigators.dart";
 import "package:flutter/material.dart";
-import "package:sunmolor_team/helper/navigator.dart";
-
 
 class AppColors {
   static Brightness brightness() {
@@ -26,9 +24,9 @@ class AppColors {
 
   static Color primary() {
     if (darkMode()) {
-      return Color.fromARGB(255, 255, 29, 29);
+      return darkColorScheme.primary;
     } else {
-      return Colors.green;
+      return lightColorScheme.primary;
     }
   }
 
@@ -154,17 +152,17 @@ class AppColors {
 
   static Color background() {
     if (darkMode()) {
-      return darkColorScheme.background;
+      return darkColorScheme.surface;
     } else {
-      return lightColorScheme.background;
+      return lightColorScheme.surface;
     }
   }
 
   static Color onBackground() {
     if (darkMode()) {
-      return darkColorScheme.onBackground;
+      return darkColorScheme.onSurface;
     } else {
-      return lightColorScheme.onBackground;
+      return lightColorScheme.onSurface;
     }
   }
 
@@ -186,9 +184,9 @@ class AppColors {
 
   static Color surfaceVariant() {
     if (darkMode()) {
-      return darkColorScheme.surfaceVariant;
+      return darkColorScheme.surfaceContainerHighest;
     } else {
-      return lightColorScheme.surfaceVariant;
+      return lightColorScheme.surfaceContainerHighest;
     }
   }
 
@@ -314,11 +312,9 @@ class AppColors {
     errorContainer: Color(0xFFFFDAD6),
     onError: Color(0xFFFFFFFF),
     onErrorContainer: Color(0xFF410002),
-    background: Color(0xFFFCFDF6),
-    onBackground: Color(0xFF1A1C19),
     surface: Color(0xFFFCFDF6),
     onSurface: Color(0xFF1A1C19),
-    surfaceVariant: Color(0xFFDEE5D8),
+    surfaceContainerHighest: Color(0xFFDEE5D8),
     onSurfaceVariant: Color(0xFF424940),
     outline: Color(0xFF73796F),
     onInverseSurface: Color(0xFFF1F1EB),
@@ -348,11 +344,9 @@ class AppColors {
     errorContainer: Color(0xFF93000A),
     onError: Color(0xFF690005),
     onErrorContainer: Color(0xFFFFDAD6),
-    background: Color(0xFF1A1C19),
-    onBackground: Color(0xFFE2E3DD),
     surface: Color(0xFF1A1C19),
     onSurface: Color(0xFFE2E3DD),
-    surfaceVariant: Color(0xFF424940),
+    surfaceContainerHighest: Color(0xFF424940),
     onSurfaceVariant: Color(0xFFC2C8BD),
     outline: Color(0xFF8C9388),
     onInverseSurface: Color(0xFF1A1C19),

@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations, always_specify_types, avoid_print, non_constant_identifier_names, depend_on_referenced_packages
+
 import "dart:async";
 import "dart:convert";
 import "dart:io";
@@ -5,11 +7,11 @@ import "dart:typed_data";
 
 import "package:dio/dio.dart";
 import "package:dio/io.dart";
-import "package:sunmolor_team/api/common/custom_log_interceptor.dart";
-import "package:sunmolor_team/api/interceptor/authorize_interceptor.dart";
-import "package:sunmolor_team/constant.dart";
 
-class ApiManager {
+
+import "package:catat_keuangan/constant.dart";
+
+class ApiManager {          
   static bool PRIMARY = true;
 
   static Future<Dio> getDio({
@@ -39,9 +41,9 @@ class ApiManager {
       ),
     );
 
-    dio.interceptors.add(AuthorizationInterceptor());
+
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
-    dio.interceptors.add(CustomLogInterceptor());
+
 
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       HttpClient httpClient = HttpClient();
@@ -63,5 +65,4 @@ class ApiManager {
     return response.data;
   }
 
-  final dio = Dio();
 }
