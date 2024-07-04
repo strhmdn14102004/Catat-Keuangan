@@ -12,7 +12,6 @@ import "package:catat_keuangan/module/synchronization/synchronization_bloc.dart"
 import "package:catat_keuangan/service/background_service.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart";
-import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:get/get_navigation/src/root/get_material_app.dart";
 import "package:intl/date_symbol_data_local.dart";
@@ -26,10 +25,6 @@ void main() async {
   initializeDateFormatting();
   await Preferences.getInstance().init();
   await BackgroundService.initialize();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
-  ]);
   runApp(App());
 }
 
@@ -41,7 +36,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(_getPreferredOrientations(context));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => SynchronizationBloc()),
@@ -101,14 +95,6 @@ class App extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  List<DeviceOrientation> _getPreferredOrientations(BuildContext context) {
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    bool useLandscape = shortestSide > 600;
-    return useLandscape
-        ? [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]
-        : [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
   }
 }
 
