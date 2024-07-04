@@ -12,7 +12,7 @@ import "package:workmanager/workmanager.dart";
 @pragma("vm:entry-point")
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    print("Toyota Big Part native called background task: $task");
+    print("Catatan Keuangan native called background task: $task");
     await Preferences.getInstance().init();
     DartPluginRegistrant.ensureInitialized();
     initializeDateFormatting();
