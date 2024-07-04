@@ -6,14 +6,9 @@ class Parameter {
 }
 
 class ApiUrl {
-  static String MAIN_BASE = "https://posdemo.sisapp.com:8443/big-part/api/v1/";
+  static String MAIN_BASE = "";
   static String SECONDARY_BASE =
-      "https://posdemo.sisapp.com:8443/big-part/api/v1/";
-  static String VERSION = "check-version";
-  static String DESTINATION = "destinations";
-  static String LOT_PROCESS = "lot-processes";
-  static String CASE = "cases";
-  static String SEQUENCE = "sequences";
+      "";
 
 }
 
@@ -53,6 +48,4 @@ enum ScannerWordCase {
 enum activityHistory {
   SIGN_IN,
   SIGN_OUT,
-  START_ACTIVITY,
-  STOP_ACTIVITY,
 }

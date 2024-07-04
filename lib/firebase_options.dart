@@ -48,12 +48,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC_sx7_5quloKE9uoH-xDveYvlfvp3j4Hw',
-    appId: '1:789661885548:android:ff4f263cdb128e67a5a449',
+    appId: '',
     messagingSenderId: '789661885548',
     projectId: 'catat-keuangan-c0a5f',
     authDomain: 'catat-keuangan-c0a5f.firebaseapp.com',
     storageBucket: 'gs://catat-keuangan-c0a5f.appspot.com',
-    iosClientId: '1045475764615-sh6bdtfvq5gi9hdi9elu247v7usqsvpl.apps.googleusercontent.com',
-    iosBundleId: 'com.mrezys',
+    iosClientId: '',
+    iosBundleId: '',
   );
 }
