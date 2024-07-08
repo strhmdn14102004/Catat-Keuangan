@@ -27,46 +27,46 @@ class _HomePageState extends State<HomePage> {
   bool _isDarkMode = false; // State to track dark mode
   int _selectedIndex = 0; // State to track selected bottom nav item
   DateTimeRange? _selectedDateRange; // State to track selected date range
+DateTime _selectedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
   }
 
- Future<void> _logout(BuildContext context) async {
-  bool confirmLogout = await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Konfirmasi Logout"),
-        content: Text("Apakah Anda yakin ingin logout?"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text("Batal"),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text("Logout"),
-          ),
-        ],
-      );
-    },
-  );
-
-  if (confirmLogout ?? false) {
-    await FirebaseAuth.instance.signOut();
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SignInPage()),
+  Future<void> _logout(BuildContext context) async {
+    bool confirmLogout = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Konfirmasi Logout"),
+          content: const Text("Apakah Anda yakin ingin logout?"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text("Batal"),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text("Logout"),
+            ),
+          ],
+        );
+      },
     );
-  }
-}
 
+    if (confirmLogout ?? false) {
+      await FirebaseAuth.instance.signOut();
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SignInPage()),
+      );
+    }
+  }
 
   void _toggleDarkMode() {
     setState(() {
@@ -433,94 +433,120 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showAddTransactionSheet(BuildContext context) {
-    final TextEditingController amountController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
-    String? selectedType = _dropdownItems[0]; // Default to the first item
+ void _showAddTransactionSheet(BuildContext context) {
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  String? selectedType = _dropdownItems[0]; // Default to the first item
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Tambah Data Pemasukan/Pengeluaran',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Tambah Data Pemasukan/Pengeluaran',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: amountController,
+                  decoration: const InputDecoration(
+                    labelText: 'Biaya Pengeluaran/Pemasukan',
+                    border: OutlineInputBorder(),
                   ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: amountController,
-                    decoration: const InputDecoration(
-                      labelText: 'Biaya Pengeluaran/Pemasukan',
-                      border: OutlineInputBorder(),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(
+                    labelText: 'Deskripsi',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Tanggal: ${DateFormat('dd MMMM yyyy').format(_selectedDate)}',
+                      ),
                     ),
-                    keyboardType: TextInputType.number,
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: descriptionController,
-                    decoration: const InputDecoration(
-                      labelText: 'Deskripsi',
-                      border: OutlineInputBorder(),
+                    IconButton(
+                      onPressed: () async {
+                        final DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: _selectedDate,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                        );
+                        if (pickedDate != null && pickedDate != _selectedDate) {
+                          setState(() {
+                            _selectedDate = pickedDate;
+                          });
+                        }
+                      },
+                      icon: Icon(Icons.calendar_today),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  items: _dropdownItems.map((String newValue) {
+                    return DropdownMenuItem<String>(
+                      value: newValue,
+                      child: Text(newValue),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedType = newValue;
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Tipe',
+                    border: OutlineInputBorder(),
                   ),
-                  const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
-                    value: selectedType,
-                    items: _dropdownItems.map((String newValue) {
-                      return DropdownMenuItem<String>(
-                        value: newValue,
-                        child: Text(newValue),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedType = newValue;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Tipe',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      final amount = double.parse(amountController.text);
-                      final description = descriptionController.text;
-                      final type = selectedType!;
-                      final date = DateTime.now();
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    final amount = double.parse(amountController.text);
+                    final description = descriptionController.text;
+                    final type = selectedType!;
+                    final date = _selectedDate;
 
-                      context.read<TransactionBloc>().add(
-                            AddTransaction(
-                              type: type,
-                              amount: amount,
-                              description: description,
-                              date: date,
-                            ),
-                          );
+                    context.read<TransactionBloc>().add(
+                          AddTransaction(
+                            type: type,
+                            amount: amount,
+                            description: description,
+                            date: date,
+                          ),
+                        );
 
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.save),
-                    label: const Text('Simpan'),
-                  ),
-                ],
-              ),
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.save),
+                  label: const Text('Simpan'),
+                ),
+              ],
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 }
