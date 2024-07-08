@@ -7,8 +7,14 @@ import 'auth_bloc.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController emailController = TextEditingController();
+  bool _isObscure = true;
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -38,7 +44,7 @@ class SignUpPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                     SvgPicture.asset(
+                    SvgPicture.asset(
                       'assets/svg/wellcome.svg',
                       semanticsLabel: 'My SVG Image',
                       width: 200,
@@ -65,8 +71,21 @@ class SignUpPage extends StatelessWidget {
                         labelText: 'Password',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isObscure
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
                       ),
-                      obscureText: true,
+                      obscureText: _isObscure,
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(

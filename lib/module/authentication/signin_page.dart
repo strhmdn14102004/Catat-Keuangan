@@ -22,6 +22,7 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController passwordController = TextEditingController();
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth firebaseauth = FirebaseAuth.instance;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -101,8 +102,21 @@ class _SignInPageState extends State<SignInPage> {
                         labelText: 'Password',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isObscure
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
                       ),
-                      obscureText: true,
+                      obscureText: _isObscure,
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(

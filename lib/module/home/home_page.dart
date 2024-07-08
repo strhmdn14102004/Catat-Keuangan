@@ -33,15 +33,40 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  Future<void> _logout(BuildContext context) async {
+ Future<void> _logout(BuildContext context) async {
+  bool confirmLogout = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Konfirmasi Logout"),
+        content: Text("Apakah Anda yakin ingin logout?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text("Batal"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text("Logout"),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (confirmLogout ?? false) {
     await FirebaseAuth.instance.signOut();
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+    
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => SignInPage()),
     );
   }
+}
+
 
   void _toggleDarkMode() {
     setState(() {

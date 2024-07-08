@@ -20,6 +20,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +33,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           SizedBox(
             height: Dimensions.size15,
           ),
-          Text(
+          const Text(
             "Forgot Password",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
           ),
