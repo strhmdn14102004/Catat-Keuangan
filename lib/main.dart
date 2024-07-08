@@ -1,15 +1,18 @@
 import "dart:io";
 
 import "package:catat_keuangan/api/custom_http_overrides.dart";
-import "package:catat_keuangan/firebase_options.dart";
 import "package:catat_keuangan/helper/app_colors.dart";
 import "package:catat_keuangan/helper/dimensions.dart";
 import "package:catat_keuangan/helper/navigators.dart";
 import "package:catat_keuangan/helper/preferences.dart";
+import "package:catat_keuangan/module/authentication/auth_bloc.dart";
+import "package:catat_keuangan/module/authentication/signin_page.dart";
 import "package:catat_keuangan/module/home/home_bloc.dart";
-import "package:catat_keuangan/module/home/home_page.dart";
 import "package:catat_keuangan/module/synchronization/synchronization_bloc.dart";
+import "package:catat_keuangan/module/transaction/transaction_bloc.dart";
 import "package:catat_keuangan/service/background_service.dart";
+import "package:cloud_firestore/cloud_firestore.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -20,7 +23,7 @@ import "package:lottie/lottie.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
   HttpOverrides.global = CustomHttpOverrides();
   initializeDateFormatting();
   await Preferences.getInstance().init();
@@ -31,6 +34,8 @@ void main() async {
 class App extends StatelessWidget {
   final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   App({super.key});
 
@@ -40,6 +45,9 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(create: (BuildContext context) => SynchronizationBloc()),
         BlocProvider(create: (BuildContext context) => HomeBloc()),
+        BlocProvider(create: (BuildContext context) => AuthBloc(_firebaseAuth)),
+        BlocProvider(
+            create: (BuildContext context) => TransactionBloc(firestore,_firebaseAuth)),
       ],
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,
@@ -90,7 +98,7 @@ class App extends StatelessWidget {
                 child: child ?? Container(),
               );
             },
-            home: const HomePage(),
+            home: SignInPage(),
           ),
         ),
       ),

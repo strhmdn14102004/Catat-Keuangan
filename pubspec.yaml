@@ -33,6 +33,10 @@ dependencies:
   firebase_auth: ^4.19.5
   flutter_local_notifications: ^17.1.2
   firebase_core: ^2.32.0
+  equatable: ^2.0.5
+  hydrated_bloc: ^9.1.5
+  fl_chart: ^0.68.0
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +49,7 @@ flutter:
     - assets/
     - assets/font/
     - assets/image/
+    - assets/svg/
     - assets/lottie/
   fonts:
     - family: Barlow

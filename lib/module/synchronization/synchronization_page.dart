@@ -49,10 +49,10 @@ class SynchronizationPageState extends State<SynchronizationPage> {
                 total = state.total;
               });
             } else if (state is SynchronizationSuccess) {
-              Navigators.pushAndRemoveAll(
-                context,
-                const HomePage(),
-              );
+              // Navigators.pushAndRemoveAll(
+              //   context,
+              //    HomePage(),
+              // );
             }
           },
           child: SizedBox(

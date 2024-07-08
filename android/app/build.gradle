@@ -73,10 +73,10 @@ android {
             signingConfig signingConfigs.debug
         }
 
-        debug {
-            applicationIdSuffix = '.sandbox'
-            versionNameSuffix = '-sandbox'
-        }
+        // debug {
+        //     applicationIdSuffix = '.sandbox'
+        //     versionNameSuffix = '-sandbox'
+        // }
     }
 
     lintOptions {
